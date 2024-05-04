@@ -1,0 +1,61 @@
+#include <iostream>
+#include <vector>
+
+// stackclass using vector
+class Stack {
+private:
+    std::vector<char> elements;
+public:
+    // method to push element onto the stack
+    void push(char value) {
+        elements.push_back(value);
+    }
+    
+    // method to pop element from the stack
+    void pop() {
+        if (!elements.empty()) {
+            elements.pop_back();
+        }
+    }
+    
+    // method to check if the stack is empty
+    bool isEmpty() {
+        return elements.empty();
+    }
+};
+
+// function to check if the parentheses in a given string are balanced
+std::string checkBalancedParentheses(const std::string& expression) {
+    Stack stack;
+    
+    for (char c : expression) {
+        if (c == '(') {
+            stack.push(c);
+        } else if (c == ')') {
+            if (stack.isEmpty()) {
+                return "Not Balanced";
+            } else {
+                stack.pop();
+            }
+        }
+    }
+    
+    if (stack.isEmpty()) {
+        return "Balanced";
+    } else {
+        return "Not Balanced";
+    }
+}
+
+int main() {
+    // read expression from the user
+    std::string expression;
+    std::cout << "Enter an expression: ";
+    std::cin >> expression;
+
+    // check if the parentheses are balanced
+    std::string result = checkBalancedParentheses(expression);
+    std::cout << "Expression is: " << result << std::endl;
+
+    return 0;
+}
