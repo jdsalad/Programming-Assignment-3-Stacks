@@ -1,59 +1,59 @@
 #include <iostream>
 #include <vector>
 
-// stackclass using vector
+// Stack class using a vector
 class Stack {
 private:
-    std::vector<char> elements;
+    std::vector<char> elements; // Vector to store elements of the stack
 public:
-    // method to push element onto the stack
+    // Method to push an element onto the stack
     void push(char value) {
-        elements.push_back(value);
+        elements.push_back(value); // Push the value onto the vector
     }
     
-    // method to pop element from the stack
+    // Method to pop an element from the stack
     void pop() {
-        if (!elements.empty()) {
-            elements.pop_back();
+        if (!elements.empty()) { // Check if the stack is not empty
+            elements.pop_back(); // Remove the last element from the vector
         }
     }
     
-    // method to check if the stack is empty
+    // Method to check if the stack is empty
     bool isEmpty() {
-        return elements.empty();
+        return elements.empty(); // Return true if the vector is empty, indicating the stack is empty
     }
 };
 
-// function to check if the parentheses in a given string are balanced
+// Function to check if the parentheses in a given string are balanced
 std::string checkBalancedParentheses(const std::string& expression) {
-    Stack stack;
+    Stack stack; // Create an instance of the Stack class
     
-    for (char c : expression) {
+    for (char c : expression) { // Iterate through each character in the expression
         if (c == '(') {
-            stack.push(c);
+            stack.push(c); // If the character is an opening parenthesis, push it onto the stack
         } else if (c == ')') {
-            if (stack.isEmpty()) {
+            if (stack.isEmpty()) { // If the character is a closing parenthesis and the stack is empty, return "Not Balanced"
                 return "Not Balanced";
             } else {
-                stack.pop();
+                stack.pop(); // If the character is a closing parenthesis and the stack is not empty, pop an opening parenthesis from the stack
             }
         }
     }
     
     if (stack.isEmpty()) {
-        return "Balanced";
+        return "Balanced"; // If the stack is empty after processing the entire expression, return "Balanced"
     } else {
-        return "Not Balanced";
+        return "Not Balanced"; // If the stack is not empty after processing the entire expression, return "Not Balanced"
     }
 }
 
 int main() {
-    // read expression from the user
+    // Read expression from the user
     std::string expression;
     std::cout << "Enter an expression: ";
     std::cin >> expression;
 
-    // check if the parentheses are balanced
+    // Check if the parentheses are balanced
     std::string result = checkBalancedParentheses(expression);
     std::cout << "Expression is: " << result << std::endl;
 
